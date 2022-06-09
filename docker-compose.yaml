@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  bone-swap:
+    build: bone-swap
+    ports:
+      - "3000:3000"
+  # chats:
+  #   build: chats
+  #   ports:
+  #     - "3001:3000"
+  # accountManagement:
+  #   build: accountManagement
+  #   ports:
+  #     - "3002:3000"
+  #  Start server in terminal 1. npm i 2.npm run start
+  # server:
+  #   build: server
+  #   ports:
+  #     - "8080:3000"
