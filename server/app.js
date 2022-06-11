@@ -21,7 +21,9 @@ app.use(cors({ origin: true, credentials: true }));
 
 // routes
 const testRoutes = require('./routes/test');
+const usersRoutes = require('./routes/usersRoutes');
 app.use('/', testRoutes);
+app.use('/users', usersRoutes);
 
 // port
 const port = process.emitWarning.PORT || 8080;
