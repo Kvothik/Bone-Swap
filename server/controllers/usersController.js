@@ -1,4 +1,4 @@
-const testDbModel = require('../models/test')
+const usersDbModel = require('../models/Users')
 
 exports.createUsers = async (req, res) => {
     const usersObj = new usersDbModel(req.body);

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const usersSchema = new mongoose.Schema({
     ID: {
-        type: Integer,
+        type: Number,
         unique: true,
         required: true
     },
@@ -27,4 +27,4 @@ const usersSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('temp', usersSchema);
+module.exports = mongoose.model('Users', usersSchema);
