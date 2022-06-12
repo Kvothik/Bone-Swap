@@ -1,6 +1,6 @@
-export async function createUsers(usersObj) {
+export async function addUsers(usersObj) {
     try {
-        const res = await fetch('http://localhost:8080/users/createUsers', {
+        const res = await fetch('http://localhost:8080/users/addUsers', {
             method: 'POST',
             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
             body: JSON.stringify(usersObj)

@@ -1,6 +1,6 @@
 const usersDbModel = require('../models/Users')
 
-exports.createUsers = async (req, res) => {
+exports.addUsers = async (req, res) => {
     const usersObj = new usersDbModel(req.body);
     await usersObj.save().then(() => {
         res.status(200).json({ usersObj });

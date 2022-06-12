@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { createUsers, getUsers } = require('../controllers/usersController');
+const { addUsers, getUsers } = require('../controllers/usersController');
 
 // POST
-router.post('/createUsers', createUsers);//POST to mongodb template
+router.post('/addUsers', addUsers);//POST to mongodb template
 // GET
 router.get('/getUser', getUser);
 // PATCH
