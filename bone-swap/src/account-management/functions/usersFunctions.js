@@ -8,9 +8,9 @@ export async function addUsers(usersObj) {
         return await res.json();
     } catch (err) { console.log(err); }
 }
-export const getUser = async (id) => {
+export const getUsers = async (id) => {
     try {
-        const res = await fetch('http://localhost:8080/users/getUser', {
+        const res = await fetch('http://localhost:8080/users/getUsers', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
