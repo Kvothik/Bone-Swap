@@ -6,7 +6,7 @@ const { createUsers, getUsers } = require('../controllers/usersController');
 // POST
 router.post('/createUsers', createUsers);//POST to mongodb template
 // GET
-router.get('/getUsers', getUsers);
+router.get('/getUser', getUser);
 // PATCH
 
 // DELETE

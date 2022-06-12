@@ -8,15 +8,13 @@ export async function createUsers(usersObj) {
         return await res.json();
     } catch (err) { console.log(err); }
 }
-export const getUserbyID = async (id) => {
+export const getUser = async (id) => {
     try {
-        const res = await fetch('http://localhost:8080//', {
+        const res = await fetch('http://localhost:8080/users/getUser', {
             method: 'GET',
             headers: {
-                Accept: 'application/json',
-                'Content-type': 'application/json',
-                // will need this if we setup user auth/permissions
-                // 'Authorization': 'Bearer' + credentials
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
             },
         });
         return await res.json();

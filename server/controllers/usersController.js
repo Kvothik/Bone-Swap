@@ -9,7 +9,7 @@ exports.createUsers = async (req, res) => {
     })
 };
 
-exports.getUsers = async (req, res) => {
+exports.getUser = async (req, res) => {
     usersDbModel.find().then(data => res.json(data))
     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 };
