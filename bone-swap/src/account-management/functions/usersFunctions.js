@@ -1,6 +1,6 @@
-export async function addUsers(usersObj) {
+export async function createUsers(usersObj) {
     try {
-        const res = await fetch('http://localhost:8080/users/addUsers', {
+        const res = await fetch('http://localhost:8080/users/createUsers', {
             method: 'POST',
             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
             body: JSON.stringify(usersObj)
@@ -8,9 +8,9 @@ export async function addUsers(usersObj) {
         return await res.json();
     } catch (err) { console.log(err); }
 }
-export const getUsers = async (id) => {
+export const getUser = async () => {
     try {
-        const res = await fetch('http://localhost:8080/users/getUsers', {
+        const res = await fetch('http://localhost:8080/users/getUser', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

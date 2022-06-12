@@ -1,21 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { addUsers, getUser } from '../account-management/functions/usersFunctions';
+import { createUsers, getUser } from '../account-management/functions/usersFunctions';
 const testObj = {
   'name': 'Merlin',
   'imageUrl': 'https://i.ibb.co/wykGdL5/20220329-174050.jpg'
 }
 
 const usersObj = {
-  'ID': 2,
-  'Username': 'Test2',
-  'ProfilePicture': 'pictureURL2',
+  'ID': 1,
+  'Username': 'Test',
+  'ProfilePicture': 'pictureURL',
   'Password': '123456',
   'SecurityEnablement': false
 }
 
-addUsers(usersObj);
+createUsers(usersObj);
+// console.log(getUser());
 
 function AccountManagement() {
   return (
