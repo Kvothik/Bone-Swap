@@ -1,50 +1,61 @@
 import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
 import './App.css';
 
 import { createUsers, getUser } from '../account-management/functions/usersFunctions';
-const testObj = {
-  'name': 'Merlin',
-  'imageUrl': 'https://i.ibb.co/wykGdL5/20220329-174050.jpg'
-}
-
-const usersObj = {
-  'ID': 1,
-  'Username': 'Test',
-  'ProfilePicture': 'pictureURL',
-  'Password': '123456',
-  'SecurityEnablement': false
-}
-
-createUsers(usersObj);
-// console.log(getUser());
 
 function AccountManagement() {
+
+  const usersObj = {
+    'ID': 2,
+    'Username': 'Test2',
+    'ProfilePicture': 'pictureURL',
+    'Password': '123456',
+    'SecurityEnablement': false
+  }
+
+  const [userData, setUserData] = useState(null);
+  createUsers(usersObj);
+  // console.log(getUser());
+
+  const seeUserData = () => {
+    setUserData("");
+    getUser().then((data) => {
+      console.log(data);
+      setUserData(data[0]);
+    })
+  };
+  
+  useEffect(() => {
+    seeUserData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      <header>
         <table>
           <thead>
             <tr>
-              <th class="tg-j5n6">Account</th>
-              <th class="tg-j5n6"> Management</th>
+              <th>Account</th>
+              <th> Management</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="tg-j5n6">Username: </td>
-              <td class="tg-f38k"></td>
+              <td>Username: </td>
+              <td>{userData.Username}</td>
             </tr>
             <tr>
-              <td class="tg-j5n6">Email: </td>
-              <td class="tg-0o1a"></td>
+              <td>Email: </td>
+              <td>{userData.Email}</td>
             </tr>
             <tr>
-              <td class="tg-j5n6">Password: </td>
-              <td class="tg-0o1a"></td>
+              <td>Password: </td>
+              <td>{userData.Password}</td>
             </tr>
             <tr>
-              <td class="tg-j5n6">MFA: </td>
-              <td class="tg-0o1a"></td>
+              <td>MFA: </td>
+              <td>{userData.SecurityEnablement}</td>
             </tr>
           </tbody>
         </table>
