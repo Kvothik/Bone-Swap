@@ -5,11 +5,11 @@ export default function RandomCat() {
 
   const fetchRandomCat = () => {
     setRandomCatImg("");
-    fetch(`https://aws.random.cat/meow`)
-      .then((res) => res.json())
-      .then((catInfo) => {
-        setRandomCatImg(catInfo.file);
-      });
+    // fetch(`https://aws.random.cat/meow`)
+    //   .then((res) => res.json())
+    //   .then((catInfo) => {
+    //     setRandomCatImg(catInfo.file);
+    //   });
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function RandomCat() {
       <header>
         <h3>Chats Random Cat pic test</h3>
         <div>
-          <button onClick={() => fetchRandomCat()}>New Cat</button>
+          {/* <button onClick={() => fetchRandomCat()}>New Cat</button> */}
         </div>
         {randomCatImg !== "" ? (
           <div>
