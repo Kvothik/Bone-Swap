@@ -4,25 +4,24 @@ import './App.css';
 
 import { createUsers, getUser } from '../account-management/functions/usersFunctions';
 
+const usersObj = {
+  'ID': 2,
+  'Username': 'Test2',
+  'ProfilePicture': 'pictureURL',
+  'Password': '123456',
+  'SecurityEnablement': false
+}
+
+createUsers(usersObj);
+
 function AccountManagement() {
-
-  const usersObj = {
-    'ID': 2,
-    'Username': 'Test2',
-    'ProfilePicture': 'pictureURL',
-    'Password': '123456',
-    'SecurityEnablement': false
-  }
-
   const [userData, setUserData] = useState(null);
-  createUsers(usersObj);
   // console.log(getUser());
 
   const seeUserData = () => {
     setUserData("");
-    getUser().then((data) => {
-      console.log(data);
-      setUserData(data[0]);
+    getUser().then((userData) => {
+      setUserData(userData[0]);
     })
   };
   
