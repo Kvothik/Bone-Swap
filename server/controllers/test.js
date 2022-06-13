@@ -1,5 +1,7 @@
+// MODELS
 const testDbModel = require('../models/test')
 
+// GET
 exports.getTest = async (req, res) => {
     res.status(200).json({
         message: "Test API is working!",
@@ -11,6 +13,7 @@ exports.getMerlin = async (req, res) => {
     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 };
 
+// CREATE
 exports.createTest = async (req, res) => {
     const testObj = new testDbModel(req.body);
     await testObj.save().then(() => {
@@ -19,3 +22,7 @@ exports.createTest = async (req, res) => {
         res.status(400).json({ msg: err });
     })
 };
+
+// UPDATE
+
+// DELETE
