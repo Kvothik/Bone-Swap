@@ -4,28 +4,10 @@ import "./App.css";
 //functions
 import { getTest, createTest, getMerlin } from './functions/test';
 
-import { createUsers, getUsers } from '../account-management/functions/usersFunctions';
 
 function Feed() {
   const [dogImg, setDogImg] = useState(null);
   const [data, setData] = useState("Before fetch test");
-
-  const testObj = {
-    'name': 'Merlin',
-    'imageUrl': 'https://i.ibb.co/wykGdL5/20220329-174050.jpg'
-  }
-
-  const usersObj = {
-    'ID': 1,
-    'Username': 'Test',
-    'ProfilePicture': 'pictureURL',
-    'Password': '123456',
-    'SecurityEnablement': false
-  }
-  
-  createUsers(usersObj);
-
-
   
   // Will fail because it was already ran and the test object already exists in db
   // createTest(testObj);
