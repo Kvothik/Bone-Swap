@@ -1,27 +1,26 @@
 // MODELS
-const testDbModel = require('../models/Posts')
+const postDbModel = require('../models/Posts')
 
 // GET
-// exports.getTest = async (req, res) => {
-//     res.status(200).json({
-//         message: "Test API is working!",
-//     });
-// };
+exports.getPosts = async (req, res) => {
+    postDbModel.find().then(data => res.json(data))
+    .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
+};
 
-// exports.getMerlin = async (req, res) => {
-//     testDbModel.find().then(data => res.json(data))
+// exports.getPostByID = async (req, res) => {
+//     postDbModel.find().then(data => res.json(data))
 //     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 // };
 
 // CREATE
-// exports.createTest = async (req, res) => {
-//     const testObj = new testDbModel(req.body);
-//     await testObj.save().then(() => {
-//         res.status(200).json({ testObj });
-//     }).catch((err) => {
-//         res.status(400).json({ msg: err });
-//     })
-// };
+exports.createPost = async (req, res) => {
+    const post = new postDbModel(req.body);
+    await post.save().then(() => {
+        res.status(200).json({ post });
+    }).catch((err) => {
+        res.status(400).json({ msg: err });
+    })
+};
 
 // UPDATE
 

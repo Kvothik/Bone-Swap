@@ -2,12 +2,6 @@
 const testDbModel = require('../models/Chats')
 
 // GET
-// exports.getTest = async (req, res) => {
-//     res.status(200).json({
-//         message: "Test API is working!",
-//     });
-// };
-
 // exports.getMerlin = async (req, res) => {
 //     testDbModel.find().then(data => res.json(data))
 //     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));

@@ -6,7 +6,7 @@ const postsSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    UserId: {
+    UserID: {
         type: Number,
         unique: true,
         required: true

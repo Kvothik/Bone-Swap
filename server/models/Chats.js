@@ -6,12 +6,12 @@ const chatsSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    User1Id: {
+    User1ID: {
         type: Number,
         unique: true,
         required: true
     },
-    User2Id: {
+    User2ID: {
         type: Number,
         unique: true,
         required: true

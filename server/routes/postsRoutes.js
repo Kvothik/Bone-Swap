@@ -3,8 +3,6 @@ const router = express.Router();
 
 // Controllers
 
-// middlewares
-
 // api routes
 //CREATE
 
