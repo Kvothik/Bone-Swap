@@ -13,12 +13,10 @@ const usersSchema = new mongoose.Schema({
     },
     ProfilePicture: {
         type: String,
-        unique: true,
         required: true
     },
     Password: {
         type: String,
-        unique: true,
         required: true
     },
     SecurityEnablement: {
