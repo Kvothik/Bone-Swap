@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { createChat, getChats, getChatByID, updateChatByID, deleteChatByID } = require('../controllers/postsController');
+const { createChat, getChats, getChatByID, updateChatByID, deleteChatByID } = require('../controllers/chatsController');
 
 // POST
 router.post('/createChat', createChat);//POST to mongodb template
