@@ -3,21 +3,24 @@ import './App.css';
 
 import { createUsers, getUser } from './functions/usersFunctions';
 
-
 // createUsers(usersObj);
 
 function AccountManagement() {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
     setIsLoading(true);
     if (userData === null) {
       getUser().then((data) => {
-        let user = data[0];
-        if (user.Email == null) {
-          user.Email = "No email entered."
-        }
+
+        const currentSessionUser = ["test2", "pass"];
+        const index = data.findIndex(object => {
+         return object.Username === currentSessionUser[0];
+        });
+
+        let user = data[index];
         if (user.SecurityEnablement == false) {
           user.SecurityEnablement = "MFA not enabled."
         } else {
