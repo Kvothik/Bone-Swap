@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import React, { useState, useEffect } from "react";
 import './App.css';
-
 import { createUsers, getUser } from '../account-management/functions/usersFunctions';
 
 const usersObj = {
@@ -15,19 +14,17 @@ const usersObj = {
 createUsers(usersObj);
 
 function AccountManagement() {
-  const [userData, setUserData] = useState(null);
-  // console.log(getUser());
-
-  const seeUserData = () => {
-    setUserData("");
-    getUser().then((userData) => {
-      setUserData(userData[0]);
+  const [user, setUser] = useState(null);
+   
+  const seeUser = () => {
+    setUser("");
+    getUser().then((data) => {
+      setUser(data[0].user);
     })
   };
-  
-  useEffect(() => {
-    seeUserData();
-  }, []);
+
+  console.log(user);
+
 
   return (
     <div>
@@ -42,19 +39,19 @@ function AccountManagement() {
           <tbody>
             <tr>
               <td>Username: </td>
-              <td>{userData.Username}</td>
+              {/* <td>{userData.Username}</td> */}
             </tr>
             <tr>
               <td>Email: </td>
-              <td>{userData.Email}</td>
+              {/* <td>{userData.Email}</td> */}
             </tr>
             <tr>
               <td>Password: </td>
-              <td>{userData.Password}</td>
+              {/* <td>{userData.Password}</td> */}
             </tr>
             <tr>
               <td>MFA: </td>
-              <td>{userData.SecurityEnablement}</td>
+              {/* <td>{userData.SecurityEnablement}</td> */}
             </tr>
           </tbody>
         </table>
