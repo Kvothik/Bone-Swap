@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-// Controllers
+const { createChat, getChats, getChatByID, updateChatByID, deleteChatByID } = require('../controllers/postsController');
 
-// api routes
-//CREATE
-
-//DELETE
-
-//UPDATEs
-
-//GET
+// POST
+router.post('/createChat', createChat);//POST to mongodb template
+// GET
+router.get('/getAllChats', getChats);
+router.get('/getChatByID', getChatByID);
+// UPDATE
+router.patch('/updateChatByID', updateChatByID);
+// DELETE
+router.delete('/deleteChatByID', deleteChatByID);
 
 module.exports = router;
