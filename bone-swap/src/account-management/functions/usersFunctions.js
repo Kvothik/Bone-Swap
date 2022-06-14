@@ -1,16 +1,16 @@
-export async function createUsers(usersObj) {
+export async function createUsers(data) {
     try {
         const res = await fetch('http://localhost:8080/users/createUsers', {
             method: 'POST',
             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
-            body: JSON.stringify(usersObj)
+            body: JSON.stringify(data)
         });
         return await res.json();
     } catch (err) { console.log(err); }
 }
-export const getUser = async () => {
+export const getUsers = async () => {
     try {
-        const res = await fetch('http://localhost:8080/users/getUser', {
+        const res = await fetch('http://localhost:8080/users/getAllUsers', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
