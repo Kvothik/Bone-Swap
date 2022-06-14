@@ -2,13 +2,21 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 
 import { createUsers, getUser } from './functions/usersFunctions';
+const usersObj = {
+  ID : 1,
+  Email : "testemail1", 
+  Username : "tester1",
+  ProfilePicture : "imageurl1",
+  Password: "pass1",
+  SecurityEnablement: true 
+}
 
-// createUsers(usersObj);
+createUsers(usersObj);
+
 
 function AccountManagement() {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
 
   useEffect(() => {
     setIsLoading(true);
