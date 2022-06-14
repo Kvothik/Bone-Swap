@@ -9,19 +9,18 @@ function AccountManagement() {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // function currentUser(data) {
-  //   const currentSessionUser = ["test1", "pass"];
-  //   console.log(data.indexOf(currentSessionUser[0]));
-  //   console.log(indexOf(currentSessionUser[0], data));
-  //   return data.indexOf(currentSessionUser[0]);
-  // }
 
   useEffect(() => {
     setIsLoading(true);
     if (userData === null) {
       getUser().then((data) => {
-        // let user = data[currentUser(data)];
-        let user = data[0];
+
+        const currentSessionUser = ["test2", "pass"];
+        const index = data.findIndex(object => {
+         return object.Username === currentSessionUser[0];
+        });
+
+        let user = data[index];
         if (user.SecurityEnablement == false) {
           user.SecurityEnablement = "MFA not enabled."
         } else {
