@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const { createUsers, getUser } = require('../controllers/usersController');
+const { createUsers, getUsers, getUserByID, updateUserByID, deleteUserByID } = require('../controllers/usersController');
 
 // POST
 router.post('/createUsers', createUsers);//POST to mongodb template
 // GET
-router.get('/getUser', getUser);
-// PATCH
-
+router.get('/getAllUsers', getUsers);
+router.get('/getUserByID', getUserByID);
+// UPDATE
+router.patch('/updateUserByID', updateUserByID);
 // DELETE
+router.delete('/deleteUserByID', deleteUserByID);
 
 module.exports = router;
