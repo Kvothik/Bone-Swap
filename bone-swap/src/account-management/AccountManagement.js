@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import { createUsers, getUsers } from './functions/usersFunctions';
+import { createUsers, getUsers, getUserByID, updateUsersByID } from './functions/usersFunctions';
 
 // Creates an object that will be used to populate the DB
 const usersObj = {
-  ID : 1,
+  _id : 1,
   Email : "testemail1", 
   Username : "tester1",
   ProfilePicture : "imageurl1",
@@ -15,6 +15,9 @@ const usersObj = {
 // Implements the creatUsers() method and passes the object above
 createUsers(usersObj);
 // core function of account mangement
+
+console.log(getUserByID(1));
+
 function AccountManagement() {
   // variable and function that sets variables
   const [userData, setUserData] = useState(null);
@@ -81,6 +84,7 @@ function AccountManagement() {
                 <td>{userData.SecurityEnablement}</td>
               </tr>
             </tbody>
+            {/* <button onClick={() => }>Edit</button> */}
           </table>
         )}
 

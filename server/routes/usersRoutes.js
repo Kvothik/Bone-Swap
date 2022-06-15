@@ -7,8 +7,6 @@ const { createUsers, getUsers, getUserByID, updateUserByID, deleteUserByID } = r
 router.post('/createUsers', createUsers);//POST to mongodb template
 // GET
 router.get('/getAllUsers', getUsers);
-
-
 // GET BY ID
 router.get('/getUserByID', getUserByID);
 // UPDATE

@@ -20,7 +20,6 @@ exports.getUserByID = async (req, res) => {
     usersDbModel.findById(req.body).then(data => res.json(data))
     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 };
-
 // UPDATE
 exports.updateUserByID = async (req, res) => {
     usersDbModel.findByIdAndUpdate(req.body.id, res.body).then(data => res.json(data))
