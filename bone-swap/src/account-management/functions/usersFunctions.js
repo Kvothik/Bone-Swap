@@ -11,7 +11,7 @@ export async function createUsers(data) {
 export async function updateUserByID(data) {
     try {
         const res = await fetch('http://localhost:8080/users/updateUsersByID', {
-            method: 'POST',
+            method: 'PATCH',
             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
@@ -32,7 +32,7 @@ export const getUsers = async () => {
 }
 export const getUserByID = async () => {
     try {
-        const res = await fetch('http://localhost:8080/users/getUsersByID', {
+        const res = await fetch('http://localhost:8080/users/getUserByID', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
