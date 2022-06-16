@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import { createUsers, getUsers,  getCurrentUser, updateUsersByID } from './functions/usersFunctions';
+import { createUsers, getUsers,  getCurrentUser, updateUsersByID,  } from './functions/usersFunctions';
 
+
+//Lines 6-17 are no longer needed once the database is populated.
 // Creates an object that will be used to populate the DB
-const usersObj = {
-  _id: 1,
-  Email: "testemail1",
-  Username: "tester1",
-  ProfilePicture: "imageurl1",
-  Password: "pass1",
-  SecurityEnablement: true
-}
-
+// const usersObj = {
+//   _id: 1,
+//   Email: "testemail1",
+//   Username: "tester1",
+//   ProfilePicture: "imageurl1",
+//   Password: "pass1",
+//   SecurityEnablement: true
+// }
 // Implements the creatUsers() method and passes the object above
 // createUsers(usersObj);
 
+
 // core function of account mangement
-
-
-
 function AccountManagement() {
   // variable and function that sets variables
   const [userData, setUserData] = useState(null);
@@ -36,7 +35,6 @@ function AccountManagement() {
           data.SecurityEnablement = "MFA is enabled."
         }
         console.log(data);
-
         setUserData(data);
         setIsLoading(false);
       });
@@ -44,6 +42,13 @@ function AccountManagement() {
       
     } 
   }, [setUserData]);
+
+
+  function somefun() {
+  console.log(AccountManagement.getElementById("userForm").value);
+  return document.getElementById("userForm").value;
+  } 
+  
 
   // creates table
   return (
@@ -54,32 +59,38 @@ function AccountManagement() {
           <table>
             <thead>
               <tr>
-                <th>Account</th>
-                <th> Management</th>
+                <th></th>
+                <th>Account Management</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Username: </td>
                 <td>{userData.Username}</td>
+                <td><form id="userForm"><input type="text"/></form></td>
               </tr>
               <tr>
                 <td>Email: </td>
                 <td>{userData.Email}</td>
+                <td width="33%"><form id="emailForm"><input type="text"/></form></td>
               </tr>
               <tr>
                 <td>Password: </td>
                 <td>{userData.Password}</td>
+                <td><form id="passForm"><input type="text"/></form></td>
               </tr>
               <tr>
                 <td>MFA: </td>
                 <td>{userData.SecurityEnablement}</td>
+                <td width="33%"><form id="mfaForm"><input type="checkbox"/></form></td>
+              </tr>
+              <tr>
+                <td><button onClick={() => somefun}>Save</button></td>
               </tr>
             </tbody>
-            {/* <button onClick={() => }>Edit</button> */}
           </table>
         )}
-
     </div>
   );
 }
