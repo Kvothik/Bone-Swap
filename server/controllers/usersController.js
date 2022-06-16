@@ -18,18 +18,12 @@ exports.getUsers = async (req, res) => {
 };
 
 // GET
-exports.getUserByID = async (req, res) => {
+exports.getCurrentUser = async (req, res) => {
     usersDbModel.find().then(data => {
         const index = data.findIndex(object => {
             return object.Username === currentSessionUser[0]
         })
-        let user = data[index];
-        if (user.SecurityEnablement == false) {
-            user.SecurityEnablement = "MFA not enabled."
-          } else {
-            user.SecurityEnablement = "MFA is enabled."
-          }
-        res.json(user)})
+        res.json(data[index])})
     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 };
 

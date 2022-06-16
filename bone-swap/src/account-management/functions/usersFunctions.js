@@ -30,9 +30,9 @@ export const getUsers = async () => {
         return await res.json();
     } catch (err) { }
 }
-export const getUserByID = async () => {
+export const getCurrentUser = async () => {
     try {
-        const res = await fetch('http://localhost:8080/users/getUserByID', {
+        const res = await fetch('http://localhost:8080/users/getCurrentUser', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
