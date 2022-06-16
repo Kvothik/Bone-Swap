@@ -45,7 +45,7 @@ function AccountManagement() {
 
 
   function somefun() {
-  console.log(AccountManagement.getElementById("userForm").value);
+  console.log(document.getElementById("userForm").value);
   return document.getElementById("userForm").value;
   } 
   
@@ -86,7 +86,7 @@ function AccountManagement() {
                 <td width="33%"><form id="mfaForm"><input type="checkbox"/></form></td>
               </tr>
               <tr>
-                <td><button onClick={() => somefun}>Save</button></td>
+                <td><button onClick={() => somefun()}>Save</button></td>
               </tr>
             </tbody>
           </table>
