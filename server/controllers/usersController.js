@@ -34,8 +34,11 @@ exports.getCurrentUser = async (req, res) => {
 // };
 // UPDATE
 exports.updateUserByID = async (req, res) => {
-    usersDbModel.findByIdAndUpdate(req.body.id, res.body).then(data => res.json(data))
+    
+    usersDbModel.findByIdAndUpdate({ _id: req.body._id },
+    { Username: req.body.Username }, { Email: req.body.Email }, { Password: req.body.Password }).then(data => res.json(data))
     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
+    console.log(res);
 };
 // DELETE
 exports.deleteUserByID = async (req, res) => {

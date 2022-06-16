@@ -10,7 +10,7 @@ export async function createUsers(data) {
 }
 export async function updateUserByID(data) {
     try {
-        const res = await fetch('http://localhost:8080/users/updateUsersByID', {
+        const res = await fetch('http://localhost:8080/users/updateUserByID', {
             method: 'PATCH',
             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
