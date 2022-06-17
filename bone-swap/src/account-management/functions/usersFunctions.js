@@ -1,6 +1,6 @@
-export async function createUsers(data) {
+export async function createUser(data) {
     try {
-        const res = await fetch('http://localhost:8080/users/createUsers', {
+        const res = await fetch('http://localhost:8080/users/createUser', {
             method: 'POST',
             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

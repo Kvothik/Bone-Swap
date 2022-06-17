@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import { createUsers, getUsers, getCurrentUser, updateUserByID, } from './functions/usersFunctions';
+import { createUser, getUsers, getCurrentUser, updateUserByID, } from './functions/usersFunctions';
 
 
 //Lines 6-17 are no longer needed once the database is populated.
@@ -14,7 +14,7 @@ import { createUsers, getUsers, getCurrentUser, updateUserByID, } from './functi
 //   SecurityEnablement: true
 // }
 // Implements the creatUsers() method and passes the object above
-// createUsers(usersObj);
+// createUser(usersObj);
 
 // core function of account mangement
 function AccountManagement() {
