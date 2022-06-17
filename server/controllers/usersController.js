@@ -34,11 +34,14 @@ exports.getCurrentUser = async (req, res) => {
 // };
 // UPDATE
 exports.updateUserByID = async (req, res) => {
-    
-    usersDbModel.findByIdAndUpdate({ _id: req.body._id },
-    { Username: req.body.Username }, { Email: req.body.Email }, { Password: req.body.Password }).then(data => res.json(data))
+    usersDbModel.findByIdAndUpdate(req.body._id,  {ProfilePicture: req.body.ProfilePicture}).then(data => res.json(data))
     .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
-    console.log(res);
+    usersDbModel.findByIdAndUpdate(req.body._id,  {Username: req.body.Username}).then(data => res.json(data))
+    .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
+    usersDbModel.findByIdAndUpdate(req.body._id,  {Password: req.body.Password}).then(data => res.json(data))
+    .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
+    usersDbModel.findByIdAndUpdate(req.body._id,  {Email: req.body.Email}).then(data => res.json(data))
+    .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 };
 // DELETE
 exports.deleteUserByID = async (req, res) => {

@@ -16,7 +16,6 @@ import { createUsers, getUsers, getCurrentUser, updateUserByID, } from './functi
 // Implements the creatUsers() method and passes the object above
 // createUsers(usersObj);
 
-
 // core function of account mangement
 function AccountManagement() {
   // variable and function that sets variables
@@ -30,25 +29,18 @@ function AccountManagement() {
     if (userData === null) {
       getCurrentUser().then((data) => {
         setIsLoading(true);
-        if (data.SecurityEnablement == false) {
-          data.SecurityEnablement = "MFA not enabled."
+        if (data.SecurityEnablement === false) {
+          data.SecurityEnablement = "No"
         } else {
-          data.SecurityEnablement = "MFA is enabled."
+          data.SecurityEnablement = "Yes"
         }
-        console.log(data);
         setUserData(data);
         setIsLoading(false);
       });
       // sets isLoading to false which exits the loop
 
     }
-  }, [setUserData]);
-
-
-  function somefun() {
-    console.log(document.getElementById("userForm").value);
-    return document.getElementById("userForm").value;
-  }
+  }, [userData, setUserData]);
 
   const handleChange = (e) => {
     updateFormData({
@@ -59,23 +51,14 @@ function AccountManagement() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(formData);
-
-
-    // ... submit to API or something
-    // if(formData.Username)
+    e.preventDefault();
     userData.Username = formData.Username;
-    // if(formData.Username)
     userData.Email = formData.Email;
-    // if(formData.Username)
     userData.Password = formData.Password;
-    // userData.ProfilePicture = formData.ProfilePicture;
-    // if(formData.Username)
-    // userData.SecurityEnablement = formData.SecurityEnablement;
+    userData.ProfilePicture = formData.ProfilePicture;
+    //userData.SecurityEnablement = formData.SecurityEnablement;
 
     updateUserByID(userData);
-    console.log(userData);
   };
 
 
@@ -86,6 +69,11 @@ function AccountManagement() {
         <p>Loading ...</p>
       ) : (
         <form>
+          <label>
+            Profile Picture
+            <input name="ProfilePicture" onChange={handleChange} />
+          </label>
+          <br />
           <label>
             Username
             <input name="Username" onChange={handleChange} />
