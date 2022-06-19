@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for MFE",
   "main": "app.js",
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "nodemon app.js",
     "test": "jest --testEnviornment=node --runInBand ./tests/users.test.js"
@@ -35,6 +36,7 @@
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "babel-jest": "^28.1.1",
-    "jest-fetch-mock": "^3.0.3"
+    "jest-fetch-mock": "^3.0.3",
+    "supertest": "^6.2.3"
   }
 }
