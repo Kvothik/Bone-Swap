@@ -1,65 +1,75 @@
+import axios from "axios";
+import request from "supertest";
+import { createUser } from '../controllers/usersController';
+jest.mock("axios");
 const User = require('../models/Users');
-const { createUsers, getUsers, getUserByID, updateUserByID, deleteUserByID } = require('../controllers/usersController');
 
 const db = require('./testDB.js');
 beforeAll(async () => await db.connect());
 afterEach(async () => await db.clearDatabase());
 afterAll(async () => await db.closeDatabase());
 
-// describe('GET users tests', () => {
-//     it('First Test', async done => {
-//         const result = await numberFunc(10)
-//         expect(result.word).toBe("ten")
-//         expect(result.number).toBeGreaterThan(10)
-//         done()
-//     })
-//     it('Second Test', async done => {
-//         const result = await numberFunc()
-//         expect(result).toBeNull()
-//         done()
-//     })
-// })
+const request = testClient(createUser);
 
-describe('CREATE users tests', () => {
+describe('CREATE & GET by ID users tests', () => {
     it('Create User Test', async done => {
-        const testUser = new User({
-            ID: 999,
+        const payload = new User({
+            _id: 999,
             Username: "UnitTestUser",
             ProfilePicture: "thisIsAURLString",
             Password: "Password",
             SecurityEnablement: false
         });
-        await createUsers(testUser.ID, testUser.Username, testUser.ProfilePicture, testUser.Password, testUser.SecurityEnablement);
-        const testUserDB = await User.findById(testUser.ID);
-        expect(testUserDB.ID).toBe(999);
-        done()
+
+        const res = await request
+            .post("http://localhost:8080/users/createUser")
+            .set({
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            })
+            .send(JSON.stringify(payload));
+        expect(res.status).toBe(200);
+        expect(res.body.Username).toEqual({
+            name: 'UnitTestUser',
+        });
+        // Create user
+        // axios.post(`http://localhost:8080/users/createUser`, testUser).then(res => {
+        //     axios.get('http://localhost:8080/users/getUserByID', res.body._id).then((testUserDB) => {
+        //         console.log(testUserDB);
+        //         expect(testUserDB._id).toBe(999);
+        //         done()
+        //     });
+        // });
+        // createUser(testUser).then((data) => {
+        //     // Get user that was created
+        //     getUserByID(testUser._id).then((testUserDB) => {
+        //         console.log(testUserDB);
+        //         // expect(testUserDB._id).toBe(999);
+        //         done()
+        //     });
+        // });
     })
 })
 
-// describe('UPDATE users tests', () => {
-//     it('First Test', async done => {
-//         const result = await numberFunc(10)
-//         expect(result.word).toBe("ten")
-//         expect(result.number).toBeGreaterThan(10)
-//         done()
-//     })
-//     it('Second Test', async done => {
-//         const result = await numberFunc()
-//         expect(result).toBeNull()
-//         done()
-//     })
-// })
+// functions
+// async function getUserByID(data) {
+//     try {
+//         const res = await fetch('http://localhost:8080/users/getUserByID', {
+//             method: 'GET',
+//             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
+//             body: JSON.stringify(data)
+//         });
+//         return await res.json();
+//     } catch (err) { console.log(err); }
+// }
 
-// describe('DELETE users tests', () => {
-//     it('First Test', async done => {
-//         const result = await numberFunc(10)
-//         expect(result.word).toBe("ten")
-//         expect(result.number).toBeGreaterThan(10)
-//         done()
-//     })
-//     it('Second Test', async done => {
-//         const result = await numberFunc()
-//         expect(result).toBeNull()
-//         done()
-//     })
-// })
+// async function createUser(data) {
+//     try {
+//         const res = await fetch('http://localhost:8080/users/createUser', {
+//             method: 'POST',
+//             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
+//             body: JSON.stringify(data)
+//         });
+//         return await res.json();
+//     } catch (err) { console.log(err); }
+// }

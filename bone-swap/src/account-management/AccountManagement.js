@@ -1,72 +1,102 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
+import { createUser, getUsers, getCurrentUser, updateUserByID, } from './functions/usersFunctions';
 
-import { createUsers, getUser } from './functions/usersFunctions';
 
-// createUsers(usersObj);
+//Lines 6-17 are no longer needed once the database is populated.
+// Creates an object that will be used to populate the DB
+// const usersObj = {
+//   _id: 1,
+//   Email: "testemail1",
+//   Username: "tester1",
+//   ProfilePicture: "imageurl1",
+//   Password: "pass1",
+//   SecurityEnablement: true
+// }
+// Implements the creatUsers() method and passes the object above
+// createUser(usersObj);
 
+// core function of account mangement
 function AccountManagement() {
+  // variable and function that sets variables
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-
+  const [formData, updateFormData] = useState(userData);
+  // pulls the data from the DB using effect
   useEffect(() => {
-    setIsLoading(true);
+    // sets the variable isLoading to true meaning the page is still loading
+    // checks to see if userData is null. If it is it fetches the users from DB
     if (userData === null) {
-      getUser().then((data) => {
-
-        const currentSessionUser = ["test2", "pass"];
-        const index = data.findIndex(object => {
-         return object.Username === currentSessionUser[0];
-        });
-
-        let user = data[index];
-        if (user.SecurityEnablement == false) {
-          user.SecurityEnablement = "MFA not enabled."
+      getCurrentUser().then((data) => {
+        setIsLoading(true);
+        if (data.SecurityEnablement === false) {
+          data.SecurityEnablement = "No"
         } else {
-          user.SecurityEnablement = "MFA is enabled."
+          data.SecurityEnablement = "Yes"
         }
-        setUserData(user);
+        setUserData(data);
         setIsLoading(false);
-      })
-    }
-  }, [setUserData]);
+      });
+      // sets isLoading to false which exits the loop
 
+    }
+  }, [userData, setUserData]);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim()
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    userData.Username = formData.Username;
+    userData.Email = formData.Email;
+    userData.Password = formData.Password;
+    userData.ProfilePicture = formData.ProfilePicture;
+    //userData.SecurityEnablement = formData.SecurityEnablement;
+
+    updateUserByID(userData);
+  };
+
+
+  // creates table
   return (
     <div>
-      <header>
-        {isLoading ? (
-          <p>Loading ...</p>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Account</th>
-                <th> Management</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Username: </td>
-                <td>{userData.Username}</td>
-              </tr>
-              <tr>
-                <td>Email: </td>
-                <td>{userData.Email}</td>
-              </tr>
-              <tr>
-                <td>Password: </td>
-                <td>{userData.Password}</td>
-              </tr>
-              <tr>
-                <td>MFA: </td>
-                <td>{userData.SecurityEnablement}</td>
-              </tr>
-            </tbody>
-          </table>
-        )}
-
-      </header>
+      {isLoading ? (
+        <p>Loading ...</p>
+      ) : (
+        <form>
+          <label>
+            Profile Picture
+            <input name="ProfilePicture" onChange={handleChange} />
+          </label>
+          <br />
+          <label>
+            Username
+            <input name="Username" onChange={handleChange} />
+          </label>
+          <br />
+          <label>
+            Email
+            <input name="Email" onChange={handleChange} />
+          </label>
+          <br />
+          <label>
+            Password
+            <input name="Password" onChange={handleChange} />
+          </label>
+          <br />
+          <label>
+            MFA
+            <input type="checkbox" name="SecurityEnablement" onChange={handleChange} />
+          </label>
+          <br />
+          <button onClick={handleSubmit}>Submit</button>
+        </form>
+      )}
     </div>
   );
 }
