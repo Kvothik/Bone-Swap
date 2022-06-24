@@ -10,12 +10,6 @@ function App() {
      <div className="feed">
         <Feed/>
       </div>
-     <div className="chats">
-        <Chats/>
-      </div>
-      <div className="accountManagement">
-        <AccountManagement/>
-      </div>
     </div>
   );
 }
