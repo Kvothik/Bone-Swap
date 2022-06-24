@@ -5,14 +5,14 @@ import { createUser, getUsers, getCurrentUser, updateUserByID, } from './functio
 
 //Lines 6-17 are no longer needed once the database is populated.
 // Creates an object that will be used to populate the DB
-// const usersObj = {
-//   _id: 1,
-//   Email: "testemail1",
-//   Username: "tester1",
-//   ProfilePicture: "imageurl1",
-//   Password: "pass1",
-//   SecurityEnablement: true
-// }
+const usersObj = {
+  _id: 11,
+  Email: "testemail11",
+  Username: "tester11",
+  ProfilePicture: "imageurl11",
+  Password: "pass11s",
+  SecurityEnablement: true
+}
 // Implements the creatUsers() method and passes the object above
 // createUser(usersObj);
 
