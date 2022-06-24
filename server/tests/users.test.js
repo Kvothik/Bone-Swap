@@ -1,75 +1,29 @@
-import axios from "axios";
-import request from "supertest";
-import { createUser } from '../controllers/usersController';
-jest.mock("axios");
-const User = require('../models/Users');
+const {MongoClient} = require('mongodb');
 
-const db = require('./testDB.js');
-beforeAll(async () => await db.connect());
-afterEach(async () => await db.clearDatabase());
-afterAll(async () => await db.closeDatabase());
+describe('insert', () => {
+  let connection;
+  let db;
 
-const request = testClient(createUser);
+  beforeAll(async () => {
+    connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    db = await connection.db(globalThis.__MONGO_DB_NAME__);
+  });
 
-describe('CREATE & GET by ID users tests', () => {
-    it('Create User Test', async done => {
-        const payload = new User({
-            _id: 999,
-            Username: "UnitTestUser",
-            ProfilePicture: "thisIsAURLString",
-            Password: "Password",
-            SecurityEnablement: false
-        });
+  afterAll(async () => {
+    await connection.close();
+  });
 
-        const res = await request
-            .post("http://localhost:8080/users/createUser")
-            .set({
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            })
-            .send(JSON.stringify(payload));
-        expect(res.status).toBe(200);
-        expect(res.body.Username).toEqual({
-            name: 'UnitTestUser',
-        });
-        // Create user
-        // axios.post(`http://localhost:8080/users/createUser`, testUser).then(res => {
-        //     axios.get('http://localhost:8080/users/getUserByID', res.body._id).then((testUserDB) => {
-        //         console.log(testUserDB);
-        //         expect(testUserDB._id).toBe(999);
-        //         done()
-        //     });
-        // });
-        // createUser(testUser).then((data) => {
-        //     // Get user that was created
-        //     getUserByID(testUser._id).then((testUserDB) => {
-        //         console.log(testUserDB);
-        //         // expect(testUserDB._id).toBe(999);
-        //         done()
-        //     });
-        // });
-    })
-})
+  it('should insert a user into collection', async () => {
+    const users = db.collection('test.users');
 
-// functions
-// async function getUserByID(data) {
-//     try {
-//         const res = await fetch('http://localhost:8080/users/getUserByID', {
-//             method: 'GET',
-//             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
-//             body: JSON.stringify(data)
-//         });
-//         return await res.json();
-//     } catch (err) { console.log(err); }
-// }
+    const mockUser = { _id: 222, Email: "testemail22", Username: "tester22", ProfilePicture: "imageurl22", Password: "pass22", SecurityEnablement: true}
+    await users.insertOne(mockUser);
 
-// async function createUser(data) {
-//     try {
-//         const res = await fetch('http://localhost:8080/users/createUser', {
-//             method: 'POST',
-//             headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
-//             body: JSON.stringify(data)
-//         });
-//         return await res.json();
-//     } catch (err) { console.log(err); }
-// }
+    const insertedUser = await users.findOne({_id: 222});
+    expect(insertedUser).toEqual(mockUser);
+    
+  });
+});
