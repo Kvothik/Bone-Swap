@@ -64,7 +64,7 @@ function Feed() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
+      {/* <QueryClientProvider client={queryClient}> */}
       {!chatIsShown && !accountManagementIsShown && (
         // we will GET array of posts from DB to loop and render here like this
         //  {myArray.map(name => (  
@@ -73,18 +73,6 @@ function Feed() {
         //   </li>  
         // ))}  
         <div>
-          {/* <h3>{data}</h3>
-            <div>
-              <button onClick={() => fetchDoggo()}>New Doggo</button>
-              <button onClick={() => seeMerlinTest()}>See a Merlin from the DB</button>
-            </div>
-            {dogImg !== "" ? (
-              <div>
-                <img src={dogImg} width="400px" alt="doggo" />
-              </div>
-            ) : (
-              <div>Loading Image</div>
-            )} */}
           <header>
             <div className="Post-user">
 
@@ -131,7 +119,7 @@ function Feed() {
         </IconButton>
       </div>
       {/* <ReactQueryDevtools /> */}
-      </QueryClientProvider>
+      {/* </QueryClientProvider> */}
     </>
   );
 }
