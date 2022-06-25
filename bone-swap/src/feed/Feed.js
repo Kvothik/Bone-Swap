@@ -67,9 +67,9 @@ function Feed() {
       {/* <QueryClientProvider client={queryClient}> */}
       {!chatIsShown && !accountManagementIsShown && (
         // we will GET array of posts from DB to loop and render here like this
-        //  {myArray.map(name => (  
+        //  {postsArray.map(elementInArray => (  
         //   <li>  
-        //     {name}  
+        //     {elementInArray.content}  
         //   </li>  
         // ))}  
         <div>
