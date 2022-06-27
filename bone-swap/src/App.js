@@ -1,7 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Chats from "./chats/App"
-import AccountManagement from "./account-management/AccountManagement";
 import Feed from "./feed/Feed";
 
 function App() {
