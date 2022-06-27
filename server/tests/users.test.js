@@ -1,65 +1,29 @@
-const User = require('../models/Users');
-const { createUsers, getUsers, getUserByID, updateUserByID, deleteUserByID } = require('../controllers/usersController');
+const {MongoClient} = require('mongodb');
 
-const db = require('./testDB.js');
-beforeAll(async () => await db.connect());
-afterEach(async () => await db.clearDatabase());
-afterAll(async () => await db.closeDatabase());
+describe('insert', () => {
+  let connection;
+  let db;
 
-// describe('GET users tests', () => {
-//     it('First Test', async done => {
-//         const result = await numberFunc(10)
-//         expect(result.word).toBe("ten")
-//         expect(result.number).toBeGreaterThan(10)
-//         done()
-//     })
-//     it('Second Test', async done => {
-//         const result = await numberFunc()
-//         expect(result).toBeNull()
-//         done()
-//     })
-// })
+  beforeAll(async () => {
+    connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    db = await connection.db(globalThis.__MONGO_DB_NAME__);
+  });
 
-describe('CREATE users tests', () => {
-    it('Create User Test', async done => {
-        const testUser = new User({
-            ID: 999,
-            Username: "UnitTestUser",
-            ProfilePicture: "thisIsAURLString",
-            Password: "Password",
-            SecurityEnablement: false
-        });
-        await createUsers(testUser.ID, testUser.Username, testUser.ProfilePicture, testUser.Password, testUser.SecurityEnablement);
-        const testUserDB = await User.findById(testUser.ID);
-        expect(testUserDB.ID).toBe(999);
-        done()
-    })
-})
+  afterAll(async () => {
+    await connection.close();
+  });
 
-// describe('UPDATE users tests', () => {
-//     it('First Test', async done => {
-//         const result = await numberFunc(10)
-//         expect(result.word).toBe("ten")
-//         expect(result.number).toBeGreaterThan(10)
-//         done()
-//     })
-//     it('Second Test', async done => {
-//         const result = await numberFunc()
-//         expect(result).toBeNull()
-//         done()
-//     })
-// })
+  it('should insert a user into collection', async () => {
+    const users = db.collection('test.users');
 
-// describe('DELETE users tests', () => {
-//     it('First Test', async done => {
-//         const result = await numberFunc(10)
-//         expect(result.word).toBe("ten")
-//         expect(result.number).toBeGreaterThan(10)
-//         done()
-//     })
-//     it('Second Test', async done => {
-//         const result = await numberFunc()
-//         expect(result).toBeNull()
-//         done()
-//     })
-// })
+    const mockUser = { _id: 222, Email: "testemail22", Username: "tester22", ProfilePicture: "imageurl22", Password: "pass22", SecurityEnablement: true}
+    await users.insertOne(mockUser);
+
+    const insertedUser = await users.findOne({_id: 222});
+    expect(insertedUser).toEqual(mockUser);
+    
+  });
+});
