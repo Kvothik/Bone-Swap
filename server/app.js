@@ -36,3 +36,38 @@ const port = process.emitWarning.PORT || 8080;
 const server = app.listen(port, () =>
     console.log(`Server is running on ${port}`)
 );
+
+//Chat
+const http = require("http");
+const { Server } = require("socket.io");
+const chatApp = express();
+
+const chatServer = http.createServer(chatApp);
+
+const io = new Server(chatServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
+});
+
+chatServer.listen(8001, () => {
+  console.log("chatServer RUNNING");
+});
