@@ -16,6 +16,11 @@ const postsSchema = new mongoose.Schema({
         unique: false,
         required: false
     },
+    PostTitle: {
+        type: String,
+        unique: false,
+        required: false
+    },
     DTG: {
         type: String,
         unique: false,
