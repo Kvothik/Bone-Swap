@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "./App.css";
-import Chats from "../chats/Chats";
+import Chats from "../chats/App";
 import AccountManagement from "../account-management/AccountManagement";
 import ChatIcon from '@mui/icons-material/Chat';
 import IconButton from '@mui/material/IconButton';
