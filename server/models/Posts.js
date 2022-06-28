@@ -1,29 +1,24 @@
 const mongoose = require('mongoose');
 
 const postsSchema = new mongoose.Schema({
-    ID: {
-        type: Number,
-        unique: true,
-        required: true
-    },
     UserID: {
         type: Number,
-        unique: true,
+        unique: false,
         required: true
     },
     TextBody: {
         type: String,
-        unique: true,
+        unique: false,
         required: true
     },
     ImageUrl: {
         type: String,
-        unique: true,
+        unique: false,
         required: false
     },
     DTG: {
         type: String,
-        unique: true,
+        unique: false,
         required: false
     }
 });
