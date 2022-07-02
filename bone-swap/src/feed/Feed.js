@@ -4,7 +4,8 @@ import Chats from "../chats/App";
 import AccountManagement from "../account-management/AccountManagement";
 import ChatIcon from '@mui/icons-material/Chat';
 import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';import PersonIcon from '@mui/icons-material/Person';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; import PersonIcon from '@mui/icons-material/Person';
+import Divider from '@mui/material/Divider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getAllPosts } from './functions/postFunctions';
 
@@ -52,6 +53,9 @@ function Feed() {
             <div className="Post-user-nickname">
               <span>John Doe</span>
             </div>
+              <IconButton onClick={showChat} className="chat-button" aria-label="chat">
+                <ChatIcon />
+              </IconButton>
           </div>
         </header>
         <div className="">
@@ -69,7 +73,15 @@ function Feed() {
 
   return (
     <>
-    <header> <img src="https://i.ibb.co/18t1MtQ/Bone-Swap-Logo.png" alt="Logo" /></header>
+      <header>
+        <img src="https://i.ibb.co/18t1MtQ/Bone-Swap-Logo.png" alt="Logo" />
+        <br />
+        <IconButton onClick={showAccountManagement} className="am-button" aria-label="chat">
+          <PersonIcon />
+        </IconButton>
+        <br />
+        <hr />
+      </header>
       {isLoading ? (
         <p>Loading ...</p>
       ) : (
@@ -79,21 +91,16 @@ function Feed() {
               {feedIsShown && (
                 <>
                   <Post key={index} post={post} />
-                  <IconButton onClick={showChat} aria-label="chat">
-                    <ChatIcon />
-                  </IconButton>
-                  <IconButton onClick={showAccountManagement} aria-label="chat">
-                    <PersonIcon />
-                  </IconButton>
+                  <Divider/>
                 </>
               )}
             </>
           ))}
+          <IconButton onClick={showFeed} className="am-button" aria-label="feed">
+            <ArrowBackIcon />
+          </IconButton>
           {chatIsShown && (<Chats />)}
           {accountManagementIsShown && (<AccountManagement />)}
-          <IconButton onClick={showFeed} aria-label="feed">
-            <ArrowBackIcon/>
-          </IconButton>
         </div>
       )}
     </>

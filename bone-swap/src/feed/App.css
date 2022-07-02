@@ -76,6 +76,17 @@
     max-width: 500px;
 
   }
+  .am-button {
+
+    float: right;
+
+  }
+  .chat-button {
+
+    position:absolute; 
+    right:-330px;
+
+  }
 
   .Post-caption strong {
 
