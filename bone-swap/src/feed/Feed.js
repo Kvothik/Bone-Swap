@@ -69,6 +69,7 @@ function Feed() {
 
   return (
     <>
+    <header> <img src="https://i.ibb.co/18t1MtQ/Bone-Swap-Logo.png" alt="Logo" /></header>
       {isLoading ? (
         <p>Loading ...</p>
       ) : (
