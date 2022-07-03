@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import { createUser, getUsers, getCurrentUser, updateUserByID, } from './functions/usersFunctions';
-
+import { EditText, EditTextarea } from 'react-edit-text';
 
 //Lines 6-17 are no longer needed once the database is populated.
 // Creates an object that will be used to populate the DB
 const usersObj = {
-  _id: 11,
-  Email: "testemail11",
-  Username: "tester11",
-  ProfilePicture: "imageurl11",
-  Password: "pass11s",
+  _id: 1,
+  Email: "sampsonsNotReal@email.c0m",
+  Username: "Sampson01",
+  ProfilePicture: "https://random.dog/f856b11f-6d47-4089-9edf-aad8107161d0.jpg",
+  Password: "password",
   SecurityEnablement: true
 }
-// Implements the creatUsers() method and passes the object above
+// Implements the createUsers() method and passes the object above
 // createUser(usersObj);
 
 // core function of account mangement
@@ -57,10 +57,13 @@ function AccountManagement() {
     userData.Password = formData.Password;
     userData.ProfilePicture = formData.ProfilePicture;
     //userData.SecurityEnablement = formData.SecurityEnablement;
-
     updateUserByID(userData);
   };
 
+  const showUser = (e) => {
+    var x = document.getElementById("someIDok");
+    x.type = 'text';
+    };
 
   // creates table
   return (
@@ -70,31 +73,33 @@ function AccountManagement() {
       ) : (
         <form>
           <label>
-            Profile Picture
-            <input name="ProfilePicture" onChange={handleChange} />
+          <div className="Post-user-profilepicturebigger">
+            <img src={userData.ProfilePicture}/>
+          </div>
+            <input type="hidden" name="ProfilePicture" onChange={handleChange} />
           </label>
           <br />
           <label>
-            Username
-            <input name="Username" onChange={handleChange} />
+            <b>Username:</b> {userData.Username} <button onClick={showUser}>Edit</button>
+            <input type="hidden" name="Username" id="someIDok" onChange={handleChange} />
           </label>
           <br />
           <label>
-            Email
-            <input name="Email" onChange={handleChange} />
+            <b>Email:</b> {userData.Email}
+            <input type="hidden" name="Email" onChange={handleChange} />
           </label>
           <br />
           <label>
-            Password
-            <input name="Password" onChange={handleChange} />
+            <b>Password:</b> {userData.Password}
+            <input type="hidden" name="Password" onChange={handleChange} />
           </label>
           <br />
           <label>
-            MFA
-            <input type="checkbox" name="SecurityEnablement" onChange={handleChange} />
+            <b>MFA:</b> {userData.SecurityEnablement}
+            <input type="hidden" name="SecurityEnablement" onChange={handleChange} />
           </label>
           <br />
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit}>Save</button>
         </form>
       )}
     </div>

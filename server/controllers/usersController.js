@@ -1,5 +1,5 @@
 const usersDbModel = require('../models/Users');
-const currentSessionUser = ["tester2"];
+const currentSessionUser = ["Sampson01"];
 
 //Create
 exports.createUser = async (req, res) => {
