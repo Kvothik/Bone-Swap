@@ -8,6 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'; import PersonIcon fro
 import Divider from '@mui/material/Divider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getAllPosts } from './functions/postFunctions';
+import { getUserByID } from '../account-management/functions/usersFunctions';
 
 
 function Feed() {
@@ -42,33 +43,40 @@ function Feed() {
   };
 
   function Post(post) {
-    return (
-      <div>
-        <header>
-          {/* This will come from user once they are made in DB */}
-          <div className="Post-user">
-            <div className="Post-user-profilepicture">
-              <img src="https://t4.ftcdn.net/jpg/02/19/63/31/360_F_219633151_BW6TD8D1EA9OqZu4JgdmeJGg4JBaiAHj.jpg" alt="John D. Veloper" />
-            </div>
-            <div className="Post-user-nickname">
-              <span>John Doe</span>
-            </div>
+    console.log(post.post.UserID);
+    let userID = {
+      _id: post.post.UserID
+    }
+    getUserByID(userID).then((user) => {
+      return (
+        <div>
+          <header>
+            {/* This will come from user once they are made in DB */}
+            <div className="Post-user">
+              <div className="Post-user-profilepicture">
+                <img src={user.ProfilePicture} alt="John D. Veloper" />
+              </div>
+              <div className="Post-user-nickname">
+                <span>{user.Username}</span>
+              </div>
               <IconButton onClick={showChat} className="chat-button" aria-label="chat">
                 <ChatIcon />
               </IconButton>
+            </div>
+          </header>
+          <div className="">
+            <div className="Post-image-bg">
+              <img src={post.post.ImageURL} width="400px" alt="doggo" />
+            </div>
           </div>
-        </header>
-        <div className="">
-          <div className="Post-image-bg">
-            <img src={post.post.ImageURL} width="400px" alt="doggo" />
+          <div className="Post-caption">
+            <strong>{post.post.PostTitle} </strong>
+            <p>{post.post.TextBody}</p>
           </div>
         </div>
-        <div className="Post-caption">
-          <strong>{post.post.PostTitle} </strong>
-          <p>{post.post.TextBody}</p>
-        </div>
-      </div>
-    );
+      );
+      // setIsLoading(false);
+    });
   }
 
   return (
@@ -91,14 +99,17 @@ function Feed() {
               {feedIsShown && (
                 <>
                   <Post key={index} post={post} />
-                  <Divider/>
+                  <Divider />
                 </>
               )}
             </>
           ))}
-          <IconButton onClick={showFeed} className="am-button" aria-label="feed">
+          {chatIsShown && (<IconButton onClick={showFeed} className="am-button" aria-label="feed">
             <ArrowBackIcon />
-          </IconButton>
+          </IconButton>)}
+          {accountManagementIsShown && (<IconButton onClick={showFeed} className="am-button" aria-label="feed">
+            <ArrowBackIcon />
+          </IconButton>)}
           {chatIsShown && (<Chats />)}
           {accountManagementIsShown && (<AccountManagement />)}
         </div>

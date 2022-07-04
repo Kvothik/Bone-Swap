@@ -12,7 +12,7 @@ export async function updateUserByID(data) {
     try {
         const res = await fetch('http://localhost:8080/users/updateUserByID', {
             method: 'PATCH',
-            headers: { 'Accept': 'application/jsons', 'Content-Type': 'application/json' },
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
         return await res.json();
@@ -30,14 +30,12 @@ export const getUsers = async () => {
         return await res.json();
     } catch (err) { }
 }
-export const getUserByID = async () => {
+export async function getUserByID(id) {
     try {
         const res = await fetch('http://localhost:8080/users/getUserByID', {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json'
-            },
+            headers: {'Accept': 'application/json', 'Content-type': 'application/json'},
+            body: JSON.stringify(id)
         });
         return await res.json();
     } catch (err) { }
