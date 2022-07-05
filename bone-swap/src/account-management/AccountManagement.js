@@ -60,11 +60,6 @@ function AccountManagement() {
     updateUserByID(userData);
   };
 
-  const showUser = (e) => {
-    var x = document.getElementById("someIDok");
-    x.type = 'text';
-    };
-
   // creates table
   return (
     <div>
@@ -76,30 +71,30 @@ function AccountManagement() {
           <div className="Post-user-profilepicturebigger">
             <img src={userData.ProfilePicture}/>
           </div>
-            <input type="hidden" name="ProfilePicture" onChange={handleChange} />
+          <b>Profile Picture URL:</b> <input name="ProfilePicture" onChange={handleChange} />
           </label>
           <br />
           <label>
-            <b>Username:</b> {userData.Username} <button onClick={showUser}>Edit</button>
-            <input type="hidden" name="Username" id="someIDok" onChange={handleChange} />
+            <b>Username:</b> {userData.Username}
+            <input name="Username" onChange={handleChange} />
           </label>
           <br />
           <label>
             <b>Email:</b> {userData.Email}
-            <input type="hidden" name="Email" onChange={handleChange} />
+            <input name="Email" onChange={handleChange} />
           </label>
           <br />
           <label>
             <b>Password:</b> {userData.Password}
-            <input type="hidden" name="Password" onChange={handleChange} />
+            <input name="Password" onChange={handleChange} />
           </label>
           <br />
           <label>
             <b>MFA:</b> {userData.SecurityEnablement}
-            <input type="hidden" name="SecurityEnablement" onChange={handleChange} />
+            <input type="Checkbox" name="SecurityEnablement" onChange={handleChange} />
           </label>
           <br />
-          <button onClick={handleSubmit}>Save</button>
+          <button onClick={handleSubmit}>Update</button>
         </form>
       )}
     </div>
