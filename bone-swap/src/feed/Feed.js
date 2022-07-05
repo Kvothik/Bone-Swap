@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'; import PersonIcon fro
 import Divider from '@mui/material/Divider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getAllPosts } from './functions/postFunctions';
-import { getUserByID } from '../account-management/functions/usersFunctions';
+import { getUserByID, getUsers } from '../account-management/functions/usersFunctions';
 
 
 function Feed() {
@@ -43,46 +43,57 @@ function Feed() {
   };
 
   function Post(post) {
-    console.log(post.post.UserID);
-    let userID = {
-      _id: post.post.UserID
+    let userData = {
+      _id: post.post.UserID,
+      ProfilePicture: "",
+      Username: ""
     }
-    getUserByID(userID).then((user) => {
-      return (
-        <div>
-          <header>
-            {/* This will come from user once they are made in DB */}
-            <div className="Post-user">
-              <div className="Post-user-profilepicture">
-                <img src={user.ProfilePicture} alt="John D. Veloper" />
-              </div>
-              <div className="Post-user-nickname">
-                <span>{user.Username}</span>
-              </div>
-              <IconButton onClick={showChat} className="chat-button" aria-label="chat">
-                <ChatIcon />
-              </IconButton>
+    getUsers().then((users) => {
+      users.forEach(user => {
+        if (user._id == userData._id) {
+          // setIsLoading(true);
+          userData.ProfilePicture = user.ProfilePicture;
+          userData.Username = user.Username;
+          console.log(userData.Username);
+          console.log(userData.ProfilePicture);
+          // setIsLoading(false);
+        }
+      });
+    });
+    return (
+      <div>
+        <header>
+          {/* This will come from user once they are made in DB */}
+          <div className="Post-user">
+            <div className="Post-user-profilepicture">
+              <img src={userData.ProfilePicture} alt="NoPicUploaded" />
             </div>
-          </header>
-          <div className="">
-            <div className="Post-image-bg">
-              <img src={post.post.ImageURL} width="400px" alt="doggo" />
+            <div className="Post-user-nickname">
+              <span>{userData.Username}</span>
             </div>
+            <IconButton onClick={showChat} className="chat-button" aria-label="chat">
+              <ChatIcon />
+            </IconButton>
           </div>
-          <div className="Post-caption">
-            <strong>{post.post.PostTitle} </strong>
-            <p>{post.post.TextBody}</p>
+        </header>
+        <div className="">
+          <div className="Post-image-bg">
+            <img src={post.post.ImageURL} width="400px" alt="doggo" />
           </div>
         </div>
-      );
-      // setIsLoading(false);
-    });
+        <div className="Post-caption">
+          <strong>{post.post.PostTitle} </strong>
+          <p>{post.post.TextBody}</p>
+        </div>
+      </div>
+    );
+
   }
 
   return (
     <>
       <header>
-        <img src="https://i.ibb.co/18t1MtQ/Bone-Swap-Logo.png" alt="Logo" />
+        <img src="https://i.ibb.co/tBRgm6j/Bone-Swap-Logo.png" alt="Logo" />
         <br />
         <IconButton onClick={showAccountManagement} className="am-button" aria-label="chat">
           <PersonIcon />

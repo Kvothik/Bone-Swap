@@ -29,7 +29,7 @@ exports.getCurrentUser = async (req, res) => {
 
 exports.getUserByID = async (req, res) => {
     console.log(req.body._id);
-    usersDbModel.find().then(data => res.json(data.filter(user => user._id == res.body._id)));
+    usersDbModel.find().then(data => res.json(data));
     // .catch(err => res.status(404).json({ nodatafound: 'No data found' }));
 //     console.log(req.body);
 //         usersDbModel.findOne(req.body).then(data => res.json(data))
