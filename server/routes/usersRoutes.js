@@ -9,7 +9,7 @@ router.post('/createUser', createUser);//POST to mongodb template
 router.get('/getAllUsers', getUsers);
 // GET BY ID
 router.get('/getCurrentUser', getCurrentUser);
-router.get('/getUserByID', getUserByID);
+router.get("/getUserByID/:id", getUserByID);
 // UPDATE
 router.patch('/updateUserByID', updateUserByID);
 // DELETE

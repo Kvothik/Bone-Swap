@@ -32,14 +32,16 @@ export const getUsers = async () => {
 }
 export async function getUserByID(id) {
     try {
-        const res = await fetch('http://localhost:8080/users/getUserByID', {
-            method: 'GET',
-            headers: {'Accept': 'application/json', 'Content-type': 'application/json'},
-            body: JSON.stringify(id)
-        });
-        return await res.json();
-    } catch (err) { }
-}
+      const res = await fetch(`http://localhost:8080/users/getUserByID/${id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+      });
+      return await res.json();
+    } catch (err) {}
+  }
 export const getCurrentUser = async () => {
     try {
         const res = await fetch('http://localhost:8080/users/getCurrentUser', {
